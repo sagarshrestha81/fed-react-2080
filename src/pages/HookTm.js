@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 export default function HookTm() {
   let [num, setNum] = useState(null);
@@ -15,6 +15,9 @@ export default function HookTm() {
     setAllDog(responce.data.message)
   
   }
+  const getDogImage = async (dogName)=>{
+console.log(dogName)
+  }
 
   useEffect(() => {
     getData();
@@ -28,21 +31,23 @@ export default function HookTm() {
 
   const DataList = () => {
 
-    console.log(allDog)
-    
+  //   console.log(allDog)
+
+  //   Object.keys(allDog).map((data,idx)=>{
+  //   console.log(data)
+  //  })
+ 
     return (
       <>
-        {/* {allDog.map((data, idx) => {
+         {Object.keys(allDog).map((data, idx) => {
           return (
-            <div className="col-sm-4">
-              <div className="card-single card p-2">
-                <h3 className="card-title">Ram</h3>
-                <p>Roll No. {data}</p>
-                <p>Kathmandu,Nepal</p>
+            <div className="col-sm-4" key={idx}>
+              <div className="card-single card p-2 mb-2" onClick={()=>{getDogImage(data)}}>
+                <h3 className="card-title" >{data}</h3>
               </div>
             </div>
           );
-        })} */}
+        })} 
       </>
     );
   };
