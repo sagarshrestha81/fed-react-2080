@@ -1,29 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 export default function HookTm() {
-  // let num =5;
   let [num, setNum] = useState(null);
+  let [allDog,setAllDog] = useState([]);
 
-  //   const increase = () => {
-  //     setNum(num + 1);
-  //   };
-
-  const options = {
-    method: 'GET',
-    url: 'https://dog.ceo/api/breeds/list/all',
-  };
   
-
   const getData =async ()=>{
-
+    const options = {
+      method: 'GET',
+      url: 'https://dog.ceo/api/breeds/list/all',
+    };  
     const responce=await axios.request(options);
-    console.log(responce)
+    // console.log(responce.data.message)
+    setAllDog(responce.data.message)
   
   }
 
   useEffect(() => {
-    // console.log("responce");
-    // setNum(2);
     getData();
   }, []);
 
@@ -34,9 +27,12 @@ export default function HookTm() {
 
 
   const DataList = () => {
+
+    console.log(allDog)
+    
     return (
       <>
-        {arr.map((data, idx) => {
+        {/* {allDog.map((data, idx) => {
           return (
             <div className="col-sm-4">
               <div className="card-single card p-2">
@@ -46,7 +42,7 @@ export default function HookTm() {
               </div>
             </div>
           );
-        })}
+        })} */}
       </>
     );
   };
