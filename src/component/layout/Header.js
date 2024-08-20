@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 export default function Header() {
   return (
     <header >
@@ -9,9 +8,9 @@ export default function Header() {
       </div>
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about">About Us</a></li>
-          <li><a href="#!">Program</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
+          <li><Link to="/hook">Hook</Link></li>
           <li><a href="https://facebook.com">Contact Us</a></li>
           <li><a href="https://facebook.com" className="btn btn-success">Apply now</a></li>
         </ul>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function HookTm() {
   let [num, setNum] = useState(null);
   let [allDog, setAllDog] = useState([]);
+  let [dogImageSrc, setDogImageSrc] = useState(null);
 
   const getData = async () => {
     const options = {
@@ -13,21 +14,18 @@ export default function HookTm() {
     setAllDog(res.data.message);
   };
   const getDogImage = async (dogName) => {
-    // console.log(dogName);
-
     const options = {
       method: "GET",
-      url: "https://dog.ceo/api/breed/affenpinscher/images/random",
+      url: `https://dog.ceo/api/breed/${dogName}/images/random`,
     };
     const resRandom = await axios.request(options);
-    console.log(resRandom);
-
+    console.log(resRandom.data.message);
+    setDogImageSrc(resRandom.data.message);
   };
 
   useEffect(() => {
     getData();
   }, []);
-
 
   const DataList = () => {
     return (
@@ -52,10 +50,15 @@ export default function HookTm() {
 
   return (
     <>
-      {/* <p>im from Hook page {num}</p>
-      <button onClick={() => setNum(num + 1)}>click me</button> */}
       <div className="container">
-        <div className="row">{DataList()}</div>
+        <div className="row">
+          <div className="col-8">
+            <div className="row">{DataList()}</div>
+          </div>
+          <div className="col-4">
+            {dogImageSrc && <img src={dogImageSrc} alt="image" />}
+          </div>
+        </div>
       </div>
     </>
   );
