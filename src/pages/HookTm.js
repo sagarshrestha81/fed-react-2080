@@ -1,5 +1,6 @@
 import axios, { all } from "axios";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2';
 export default function HookTm() {
   let [num, setNum] = useState(null);
   let [allDog, setAllDog] = useState([]);
@@ -14,6 +15,24 @@ export default function HookTm() {
     setAllDog(res.data.message);
   };
   const getDogImage = async (dogName) => {
+
+
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+
+
     const options = {
       method: "GET",
       url: `https://dog.ceo/api/breed/${dogName}/images/random`,
